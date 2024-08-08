@@ -22,7 +22,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/app', require('./routes/index'));
+app.use((req, res, next) => {
+  console.log("Ben app.js te tanımlanan bir middleware'im");
+  next();
+});
+
+app.use('/api', require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
